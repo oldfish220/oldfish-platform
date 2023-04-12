@@ -6,6 +6,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
 public class JwtUtil {
 
@@ -36,6 +37,10 @@ public class JwtUtil {
         } catch (JWTVerificationException | IllegalArgumentException e) {
             return false;
         }
+    }
+
+    public static boolean isExpired(String token) {
+        return JWT.decode(token).getExpiresAt().before(new Date());
     }
 
 }
